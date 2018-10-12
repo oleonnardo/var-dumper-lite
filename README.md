@@ -19,38 +19,42 @@ Simplesmente chame as funções `dump()` ou `dd()` passando como parâmetro uma 
 Exemplos
 -----------
 
-Código:
-`<?php 
-$productos = array(
-    'producto1' => array(
-        'preco'=> 25,
-        'quantidade' => 5
-    ),
-    'producto2' => array(
-        'quantidade' => 100,
-        'producto2.1' => array(
-            'preco'=> 25,
-            'quantidade' => 5
-        ),
+<p>
+__Código:__
+<br>
+    <?php
+        $productos = array(
+            'producto1' => array(
+                'preco'=> 25,
+                'quantidade' => 5
+            ),
+            'producto2' => array(
+                'quantidade' => 100,
+                'producto2.1' => array(
+                    'preco'=> 25,
+                    'quantidade' => 5
+                ),
 
-    ),
-);
+            ),
+        );
 
-dump($productos);
-?>`
-
-Saída:
-`array:2 [
-    "producto1" => array:2 [
-        "preco" => 25
-        "quantidade" => 5
-    ]
-    "producto2" => array:2 [
-        "quantidade" => 100
-        "producto2.1" => array:2 [
+        dump($productos);
+    ?>
+</p>
+<p>
+__Saída:__
+<br>
+    array:2 [
+        "producto1" => array:2 [
             "preco" => 25
             "quantidade" => 5
         ]
-    ]
- ]`
-
+        "producto2" => array:2 [
+            "quantidade" => 100
+            "producto2.1" => array:2 [
+                "preco" => 25
+                "quantidade" => 5
+            ]
+        ]
+     ]
+</p>
