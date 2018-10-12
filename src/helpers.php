@@ -1,11 +1,9 @@
 <?php
 
-use Collective\Dumper\VarDumper;
-
 if(! function_exists('dump') ){
 
     function dump($vars){
-        $varDumper = new VarDumper();
+        $varDumper = new \Collective\Dumper\VarDumper();
 
         if( is_array($vars) ){
             foreach ($vars as $someVar) {
@@ -22,7 +20,7 @@ if(! function_exists('dump') ){
 if(! function_exists('dd') ){
 
     function dd($vars){
-        $varDumper = new VarDumper();
+        $varDumper = new \Collective\Dumper\VarDumper();
 
         if( is_array($vars) ){
             foreach ($vars as $someVar) {
