@@ -8,7 +8,7 @@ pode usar em vez de `var_dump` e `die`.
 Instalação
 ------------
 
-    composer require leonardo/var-dumper --dev
+    composer require "leonardo/var-dumper" : "dev-master"
 
 Como usar
 -----------
