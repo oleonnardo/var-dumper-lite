@@ -60,3 +60,10 @@ __Saída:__
      ]
      
 </p>
+
+<p>É possivel usar mais de uma variável:</p>
+        
+        <?php dump($var1, array( $var_2, $var_3, $var_n )); ?>
+        
+        <?php dd($var1, array( $var_2, $var_3, $var_n )); ?>
+
