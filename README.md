@@ -22,8 +22,6 @@ Exemplos
 <p>
 
 __Código:__
-
-<br>
     
     <?php
         $productos = array(
@@ -46,8 +44,6 @@ __Código:__
 <p>
     
 __Saída:__
-
-<br>
     
     array:2 [
         "producto1" => array:2 [
