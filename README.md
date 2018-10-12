@@ -8,7 +8,7 @@ pode usar em vez de `var_dump` e `die`.
 Instalação
 ------------
 
-    composer require library/var-dumper
+    composer require leonardo/var-dumper
 
 Como usar
 -----------
