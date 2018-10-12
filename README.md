@@ -22,6 +22,7 @@ Exemplos
 <p>
 __Código:__
 <br>
+    
     <?php
         $productos = array(
             'producto1' => array(
@@ -34,16 +35,16 @@ __Código:__
                     'preco'=> 25,
                     'quantidade' => 5
                 ),
-
             ),
         );
-
         dump($productos);
     ?>
+    
 </p>
 <p>
 __Saída:__
 <br>
+    
     array:2 [
         "producto1" => array:2 [
             "preco" => 25
@@ -57,4 +58,5 @@ __Saída:__
             ]
         ]
      ]
+     
 </p>
