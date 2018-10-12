@@ -20,7 +20,9 @@ Exemplos
 -----------
 
 <p>
+
 __Código:__
+
 <br>
     
     <?php
@@ -42,7 +44,9 @@ __Código:__
     
 </p>
 <p>
+    
 __Saída:__
+
 <br>
     
     array:2 [
