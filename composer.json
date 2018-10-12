@@ -2,7 +2,6 @@
     "name": "leonardo/var-dumper",
     "description": "O componente VarDumper fornece mecanismos para caminhar através de qualquer variável PHP. Construído em cima, ele fornece as funções `dump()` e `dd()` que você.",
     "keywords": ["dump", "dd", "var-dumper", "laravel"],
-    "version": "*",
     "license": "MIT",
     "authors": [
         {
@@ -11,7 +10,7 @@
         }
     ],
     "require": {
-        "php": "^5.6"
+        "php": "^5.* || ^7.*",
     },
     "autoload": {
         "files": [
