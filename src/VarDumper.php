@@ -30,6 +30,11 @@ class VarDumper {
     private $dump = '<pre class="sf-dump">%sfDump%</pre>';
 
     public function dump($var){
+        
+        if( $this->getType($var) == 'object' ){
+            $var = $this->objectToArray($var);
+        }
+
         $this->content = $this->setType($var);
         $this->content .= $this->getContent($var);
         $this->run();
@@ -38,15 +43,15 @@ class VarDumper {
     private function setType($var){
         $type = $this->getType($var);
         $complement = is_array($var) ? ' ' . $type . ':'.count($var) : '';
-
         return '<span class="sf-dump-note" style="cursor: pointer;">' . $complement . '</span>';
     }
 
     private function getType($var){
-       return gettype($var);
+        return gettype($var);
     }
 
     private function getContent($var){
+
         if( $this->getType($var) !== 'array' ){
             return $this->setItem($var);
         }
@@ -75,6 +80,26 @@ class VarDumper {
         $html .= ' ]';
 
         return $html;
+    }
+
+    private function objectToArray($object){
+        $reflectionClass = new \ReflectionClass($object);
+
+        $properties = $reflectionClass->getProperties();
+
+        $mixed = [];
+        foreach ($properties as $property) {
+            $property->setAccessible(true);
+            $value = $property->getValue($object);
+
+            if (is_object($value)) {
+                $mixed[$property->getName()] = $this->objectToArray($value);
+            } else {
+                $mixed[$property->getName()] = $value;
+            }
+        }
+
+        return $mixed;
     }
 
     private function run(){
