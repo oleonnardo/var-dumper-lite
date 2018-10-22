@@ -51,7 +51,7 @@ class VarDumper {
         'StaticProperties' => 'getStaticProperties',
         'TraitAliases' => 'getTraitAliases',
         'TraitNames' => 'getTraitNames',
-        'Traits' => 'getTraits',
+        'Traits' => 'getTraits'
     ];
 
     public function dump($var){
