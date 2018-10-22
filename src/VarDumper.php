@@ -2,6 +2,8 @@
 
 namespace Collective\Dumper;
 
+use \ReflectionClass as ReflectionClass;
+
 class VarDumper {
 
     private $content = '';
@@ -25,25 +27,59 @@ class VarDumper {
             pre.sf-dump .sf-dump-key{color:#56DB3A}
             pre.sf-dump .sf-dump-index{color:#1299DA}
             pre.sf-dump .sf-dump-ellipsis{color:#FF8400}
+            pre.sf-dump .sf-dump-icone {font-size: 15px; color: #dedede; text-decoration: none; line-height: 20px; margin: 0 -2px;}
          </style>';
 
     private $dump = '<pre class="sf-dump">%sfDump%</pre>';
 
+    private $reflection = [
+        'Name' => 'getName',
+        'NamespaceName' => 'getNamespaceName',
+        'Constants' => 'getConstants',
+        'Properties' => 'getDefaultProperties',
+        'DefaultProperties' => 'getProperties',
+        'Methods' => 'getMethods',
+        'DocComment' => 'getDocComment',
+        'Extension' => 'getExtension',
+        'ExtensionName' => 'getExtensionName',
+        'FileName' => 'getFileName',
+        'InterfaceNames' => 'getInterfaceNames',
+        'Interfaces' => 'getInterfaces',
+        'Modifiers' => 'getModifiers',
+        'ReflectionConstants' => 'getReflectionConstants',
+        'StartLine' => 'getStartLine',
+        'StaticProperties' => 'getStaticProperties',
+        'TraitAliases' => 'getTraitAliases',
+        'TraitNames' => 'getTraitNames',
+        'Traits' => 'getTraits',
+    ];
+
     public function dump($var){
-        
+        $this->content = '';
+
         if( $this->getType($var) == 'object' ){
             $var = $this->objectToArray($var);
         }
 
-        $this->content = $this->setType($var);
+        $this->content .= $this->setType($var);
         $this->content .= $this->getContent($var);
         $this->run();
     }
 
     private function setType($var){
         $type = $this->getType($var);
-        $complement = is_array($var) ? ' ' . $type . ':'.count($var) : '';
+        $complement = $this->isArray($type, $var);
         return '<span class="sf-dump-note" style="cursor: pointer;">' . $complement . '</span>';
+    }
+
+    private function isArray($type, $var){
+        $element = '';
+
+        if( is_array($var) ){
+            $element .= ' ' . $type . ':'.count($var) . ' ';
+        }
+
+        return $element;
     }
 
     private function getType($var){
@@ -83,28 +119,19 @@ class VarDumper {
     }
 
     private function objectToArray($object){
-        $reflectionClass = new \ReflectionClass($object);
+        $properties = array();
+        $reflectionClass = new ReflectionClass($object);
+        $nameClass = 'ObjectClass: ' . $reflectionClass->getShortName();
 
-        $properties = $reflectionClass->getProperties();
-
-        $mixed = [];
-        foreach ($properties as $property) {
-            $property->setAccessible(true);
-            $value = $property->getValue($object);
-
-            if (is_object($value)) {
-                $mixed[$property->getName()] = $this->objectToArray($value);
-            } else {
-                $mixed[$property->getName()] = $value;
-            }
+        foreach ($this->reflection as $key => $method) {
+            $properties[$nameClass][$key] = $reflectionClass->$method();
         }
 
-        return $mixed;
+        return $properties;
     }
 
     private function run(){
-        echo $this->css . ' ';
-        echo str_replace('%sfDump%', $this->content, $this->dump);
+        echo $this->css . ' ' . str_replace('%sfDump%', $this->content, $this->dump);
     }
 
 }
