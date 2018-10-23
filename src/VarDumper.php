@@ -36,22 +36,8 @@ class VarDumper {
         'Name' => 'getName',
         'NamespaceName' => 'getNamespaceName',
         'Constants' => 'getConstants',
-        'Properties' => 'getDefaultProperties',
         'DefaultProperties' => 'getProperties',
-        'Methods' => 'getMethods',
-        'DocComment' => 'getDocComment',
-        'Extension' => 'getExtension',
-        'ExtensionName' => 'getExtensionName',
-        'FileName' => 'getFileName',
-        'InterfaceNames' => 'getInterfaceNames',
-        'Interfaces' => 'getInterfaces',
-        'Modifiers' => 'getModifiers',
-        'ReflectionConstants' => 'getReflectionConstants',
-        'StartLine' => 'getStartLine',
-        'StaticProperties' => 'getStaticProperties',
-        'TraitAliases' => 'getTraitAliases',
-        'TraitNames' => 'getTraitNames',
-        'Traits' => 'getTraits'
+        'FileName' => 'getFileName'
     ];
 
     public function dump($var){
