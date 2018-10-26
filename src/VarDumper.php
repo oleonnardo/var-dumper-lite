@@ -82,9 +82,15 @@ class VarDumper {
     }
 
     private function setItem($varItem){
-        return ( $this->getType($varItem) === 'string' ) ?
-            ' "<span class="sf-dump-key">' . $varItem . '</span>"' :
-            ' <span class="sf-dump-num">' . $varItem . '</span>';
+        if( $this->getType($varItem) === 'boolean' ){
+            $content = ' <span class="sf-dump-const">';
+            $content .= ($varItem) ? 'true' : 'false';
+            return $content . "</span>";
+        } else {
+            return ($this->getType($varItem) === 'string') ?
+                ' "<span class="sf-dump-key">' . $varItem . '</span>"' :
+                ' <span class="sf-dump-num">' . $varItem . '</span>';
+        }
     }
 
     private function setArray($varArray){
