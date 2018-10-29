@@ -83,7 +83,7 @@ class VarDumper {
 
     private function setItem($varItem){
         
-        if( empty($varItem) ){
+        if( empty($varItem) && $varItem != 0 ){
             return ' <span class="sf-dump-note">null</span>';
         }
         
