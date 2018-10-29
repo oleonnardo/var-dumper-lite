@@ -63,7 +63,16 @@ __Saída:__
 
 <p>É possivel usar mais de uma variável:</p>
         
-        <?php dump($var1, array( $var_2, $var_3, $var_n )); ?>
+        <?php dump($var1); ?>
         
-        <?php dd($var1, array( $var_2, $var_3, $var_n )); ?>
+        <?php 
+        // Haverá um limite de 10 posições caso o $var1 seja um array
+        dump($var1, 10); 
+        ?>
+        
+        <?php dump( array($var1, $var2, $var_n) ); ?>
+        
+        <?php dd($var1); ?>
+        
+        <?php dd( array($var1, $var2, $var_n) ); ?>
 
