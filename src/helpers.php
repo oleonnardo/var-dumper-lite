@@ -2,13 +2,15 @@
 
 if(! function_exists('dump') ){
 
-    function dump($var, $someVars = array()){
+    function dump($vars, $limit = 100){
         $varDumper = new \Collective\Dumper\VarDumper();
 
-        $varDumper->dump($var);
-
-        foreach ($someVars as $someVar) {
-            $varDumper->dump($someVar);
+        if( is_array($vars) ){
+            foreach ($vars as $someVar) {
+                $varDumper->dump($someVar, $limit);
+            }
+        }else{
+            $varDumper->dump($vars, $limit);
         }
 
     }
@@ -17,13 +19,15 @@ if(! function_exists('dump') ){
 
 if(! function_exists('dd') ){
 
-    function dd($var, $someVars = array()){
+    function dd($vars, $limit = 100){
         $varDumper = new \Collective\Dumper\VarDumper();
 
-        $varDumper->dump($var);
-
-        foreach ($someVars as $someVar) {
-            $varDumper->dump($someVar);
+        if( is_array($vars) ){
+            foreach ($vars as $someVar) {
+                $varDumper->dump($someVar, $limit);
+            }
+        }else{
+            $varDumper->dump($vars, $limit);
         }
 
         die(1);
