@@ -40,11 +40,11 @@ class VarDumper {
         'FileName' => 'getFileName'
     ];
 
-    public function dump($var){
+    public function dump($var, $limit = null){
         $this->content = '';
 
         if( $this->getType($var) == 'object' ){
-            $var = $this->objectToArray($var);
+            $var = $this->objectToArray($var, $limit);
         }
 
         $this->content .= $this->setType($var);
@@ -82,11 +82,11 @@ class VarDumper {
     }
 
     private function setItem($varItem){
-        
+
         if( empty($varItem) && $varItem != 0 ){
             return ' <span class="sf-dump-note">null</span>';
         }
-        
+
         if( $this->getType($varItem) === 'boolean' ){
             $content = ' <span class="sf-dump-const">';
             $content .= ($varItem) ? 'true' : 'false';
@@ -96,7 +96,6 @@ class VarDumper {
         return ($this->getType($varItem) === 'string') ?
                 ' "<span class="sf-dump-key">' . $varItem . '</span>"' :
                 ' <span class="sf-dump-num">' . $varItem . '</span>';
-        
     }
 
     private function setArray($varArray){
@@ -116,16 +115,38 @@ class VarDumper {
         return $html;
     }
 
-    private function objectToArray($object){
+    private function objectToArray($object, $limit = null){
         $properties = array();
         $reflectionClass = new ReflectionClass($object);
         $nameClass = 'ObjectClass: ' . $reflectionClass->getShortName();
+
+        if( $reflectionClass->getShortName() == 'mysqli_result' ){
+            return $this->mysqliObject($object, $limit);
+        }
 
         foreach ($this->reflection as $key => $method) {
             $properties[$nameClass][$key] = $reflectionClass->$method();
         }
 
         return $properties;
+    }
+
+    private function mysqliObject($object, $limit = null){
+        $mixed = array();
+        $count = 1;
+
+        if(! empty($object) ){
+            foreach ($object as $item) {
+                $mixed[] = $item;
+
+                if( $count == $limit )
+                    break;
+
+                $count++;
+            }
+        }
+
+        return $mixed;
     }
 
     private function run(){
