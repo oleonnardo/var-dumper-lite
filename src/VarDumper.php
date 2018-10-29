@@ -83,14 +83,14 @@ class VarDumper {
 
     private function setItem($varItem){
         
+        if( empty($varItem) ){
+            return ' <span class="sf-dump-note">null</span>';
+        }
+        
         if( $this->getType($varItem) === 'boolean' ){
             $content = ' <span class="sf-dump-const">';
             $content .= ($varItem) ? 'true' : 'false';
             return $content . "</span>";
-        }
-
-        if( in_array($this->getType($varItem), ['null', 'NULL']) ){
-            return ' <span class="sf-dump-note">null</span>';
         }
 
         return ($this->getType($varItem) === 'string') ?
